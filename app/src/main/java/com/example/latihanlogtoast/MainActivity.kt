@@ -1,5 +1,6 @@
 package com.example.latihanlogtoast
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -11,7 +12,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,10 +21,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val appContext = applicationContext // ⬅️ ambil applicationContext di sini
+
         setContent {
             LatihanLogToastTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    CuteGreeting()
+                    CuteGreeting(context = appContext) // ⬅️ lempar ke Composable
                 }
             }
         }
@@ -32,9 +35,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CuteGreeting() {
-    val context = LocalContext.current
-
+fun CuteGreeting(context: Context) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,7 +54,7 @@ fun CuteGreeting() {
 
         Button(
             onClick = {
-                // Toast dan log
+                // Pakai applicationContext yang dilempar dari atas
                 Toast.makeText(context, "Hai, kamu lucu banget hari ini! 🍭", Toast.LENGTH_SHORT).show()
                 Log.d("MainActivity", "Tombol diklik: Toast lucu ditampilkan! 🌸")
             },
