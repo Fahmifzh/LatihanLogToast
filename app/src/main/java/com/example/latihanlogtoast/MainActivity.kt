@@ -22,12 +22,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val appContext = applicationContext // ⬅️ ambil applicationContext di sini
+        val appContext = applicationContext
 
         setContent {
             LatihanLogToastTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    CuteGreeting(context = appContext) // ⬅️ lempar ke Composable
+                    CuteGreeting(context = appContext)
                 }
             }
         }
@@ -54,7 +54,7 @@ fun CuteGreeting(context: Context) {
 
         Button(
             onClick = {
-                // Pakai applicationContext yang dilempar dari atas
+
                 Toast.makeText(context, "Hai, kamu lucu banget hari ini! 🍭", Toast.LENGTH_SHORT).show()
                 Log.d("MainActivity", "Tombol diklik: Toast lucu ditampilkan! 🌸")
             },
